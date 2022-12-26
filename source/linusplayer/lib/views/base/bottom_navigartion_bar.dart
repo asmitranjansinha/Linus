@@ -31,13 +31,14 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: screen[_selectedIndex],
       bottomNavigationBar: Container(
         height: 85,
         decoration: const BoxDecoration(
             color: Colors.black,
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                topLeft: Radius.circular(30), topRight: Radius.circular(30))),
         child: BottomNavigationBar(
           selectedItemColor: Colors.white,
           selectedLabelStyle: const TextStyle(

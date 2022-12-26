@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepOrange,
         scaffoldBackgroundColor: Colors.black,
       ),
-      home: MusicPlayerScreen(),
+      home: BottomNavigation(),
     );
   }
 }

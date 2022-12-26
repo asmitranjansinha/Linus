@@ -72,7 +72,9 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
               padding: const EdgeInsets.all(50.0),
               child: Container(
                 decoration: BoxDecoration(
-                    boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 60)],
+                    boxShadow: const [
+                      BoxShadow(color: Colors.grey, blurRadius: 60)
+                    ],
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)),
                 child: Padding(
@@ -140,8 +142,12 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
             ),
             SizedBox(
                 width: size.width / 1.5,
-                child: AdvancedSeekBar(Colors.white, 2, Colors.red,
-                    lineHeight: 5,)),
+                child: AdvancedSeekBar(
+                  Colors.white,
+                  2,
+                  Colors.red,
+                  lineHeight: 5,
+                )),
             SizedBox(
               height: size.height / 15,
             ),
