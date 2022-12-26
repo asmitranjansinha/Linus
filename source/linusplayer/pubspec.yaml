@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   lottie: ^2.1.0
   flutter_advanced_seekbar: ^0.0.2
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:

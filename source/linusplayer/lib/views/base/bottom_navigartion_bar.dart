@@ -3,7 +3,6 @@ import 'package:linusplayer/constants/images.dart';
 import 'package:linusplayer/views/favourite/favourite_page.dart';
 import 'package:linusplayer/views/home/home_page.dart';
 import 'package:linusplayer/views/library/library_page.dart';
-import 'package:linusplayer/views/search/search_page.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -15,12 +14,7 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
 
-  final screen = [
-    const HomePage(),
-    const SearchPage(),
-    const LibraryPage(),
-    const FavouritePage()
-  ];
+  final screen = [const HomePage(), const LibraryPage(), const FavouritePage()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -38,11 +32,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
         decoration: const BoxDecoration(
             color: Colors.black,
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: BottomNavigationBar(
           selectedItemColor: Colors.white,
           selectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.w700, letterSpacing: 2, height: 1.7),
+              fontWeight: FontWeight.bold, letterSpacing: 1, height: 2),
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
           type: BottomNavigationBarType.fixed,
@@ -56,12 +50,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
               ),
               label: "home",
             ),
-            BottomNavigationBarItem(
-                icon: Image.asset(
-                  Images.searchGraphic,
-                  scale: 18,
-                ),
-                label: "search"),
             BottomNavigationBarItem(
                 icon: Image.asset(
                   Images.libraryGraphic,

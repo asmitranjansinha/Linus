@@ -11,7 +11,10 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BottomMusicContainer(),
       body: Center(
-        child: Text("home"),
+        child: Text(
+          "home",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }

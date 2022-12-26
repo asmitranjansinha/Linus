@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_seekbar/flutter_advanced_seekbar.dart';
+import 'package:get/get.dart';
+import 'package:get/instance_manager.dart';
+import 'package:linusplayer/views/base/bottom_navigartion_bar.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../constants/images.dart';
@@ -39,6 +42,12 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
+                    borderRadius: BorderRadius.circular(60 / 2),
+                    onTap: () {
+                      Get.off(() => BottomNavigation(),
+                          transition: Transition.upToDown,
+                          duration: Duration(milliseconds: 500));
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
