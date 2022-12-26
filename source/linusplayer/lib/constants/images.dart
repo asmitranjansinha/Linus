@@ -7,4 +7,5 @@ class Images {
   static const String libraryGraphic = "assets/images/bookshelf.png";
   static const String favourite = "assets/images/love.png";
   static const String favouriteGraphic = "assets/images/lover.png";
+  static const String downArrow = "assets/images/arrow-down-sign-to-navigate.png";
 }

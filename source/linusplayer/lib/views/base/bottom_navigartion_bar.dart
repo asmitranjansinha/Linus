@@ -1,19 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:linusplayer/constants/images.dart';
+import 'package:linusplayer/views/favourite/favourite_page.dart';
+import 'package:linusplayer/views/home/home_page.dart';
+import 'package:linusplayer/views/library/library_page.dart';
+import 'package:linusplayer/views/search/search_page.dart';
 
-class BottomNavigation extends StatelessWidget {
+class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
+
+  @override
+  State<BottomNavigation> createState() => _BottomNavigationState();
+}
+
+class _BottomNavigationState extends State<BottomNavigation> {
+  int _selectedIndex = 0;
+
+  final screen = [
+    const HomePage(),
+    const SearchPage(),
+    const LibraryPage(),
+    const FavouritePage()
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: screen[_selectedIndex],
       bottomNavigationBar: Container(
-        height: 90,
+        height: 85,
         decoration: const BoxDecoration(
             color: Colors.black,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: BottomNavigationBar(
+          selectedItemColor: Colors.white,
+          selectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.w700, letterSpacing: 2, height: 1.7),
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.transparent,
           elevation: 0,
