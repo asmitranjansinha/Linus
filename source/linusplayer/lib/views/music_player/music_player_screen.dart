@@ -43,11 +43,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
                 children: [
                   InkWell(
                     borderRadius: BorderRadius.circular(60 / 2),
-                    onTap: () {
-                      Get.off(() => BottomNavigation(),
-                          transition: Transition.upToDown,
-                          duration: Duration(milliseconds: 500));
-                    },
+                    onTap: () => Get.back(),
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
