@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
-        scaffoldBackgroundColor: Colors.black
+        scaffoldBackgroundColor: Colors.black,
       ),
       home: MusicPlayerScreen(),
     );
