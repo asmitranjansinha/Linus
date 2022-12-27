@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../constants/images.dart';
 
-class SearcxhField extends StatelessWidget {
+class SearcxhField extends StatefulWidget {
   final hintText;
-  const SearcxhField({super.key, required this.hintText});
+  final onChanged;
+  const SearcxhField({super.key, required this.hintText, this.onChanged});
 
+  @override
+  State<SearcxhField> createState() => _SearcxhFieldState();
+}
+
+class _SearcxhFieldState extends State<SearcxhField> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -16,7 +22,7 @@ class SearcxhField extends StatelessWidget {
           color: Colors.grey.shade800, borderRadius: BorderRadius.circular(6)),
       child: TextFormField(
         decoration: InputDecoration(
-            hintText: hintText,
+            hintText: widget.hintText,
             hintStyle: const TextStyle(
                 color: Colors.white60,
                 fontSize: 15,
@@ -27,6 +33,7 @@ class SearcxhField extends StatelessWidget {
               Images.search,
               scale: 35,
             )),
+        onChanged: widget.onChanged,
       ),
     );
   }

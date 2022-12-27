@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:linusplayer/views/base/fav_button.dart';
+import 'package:linusplayer/views/base/search_field.dart';
 
 import '../../constants/images.dart';
 

@@ -96,7 +96,8 @@ class _AllSongsPageState extends State<AllSongsPage> {
                 SizedBox(
                   height: size.height / 50,
                 ),
-                SearcxhField(hintText: "Find in All Songs"),
+                SearcxhField(
+                    hintText: "Find in All Songs"),
                 SizedBox(
                   height: size.height / 30,
                 ),
