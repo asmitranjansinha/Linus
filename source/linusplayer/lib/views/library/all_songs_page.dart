@@ -23,18 +23,9 @@ class AllSongsPage extends StatefulWidget {
 class _AllSongsPageState extends State<AllSongsPage> {
   final _allAudio = OnAudioQuery();
   final AudioPlayer _audioPlayer = AudioPlayer();
-
-  var item = List<SongModel>;
-
-  getSongData() {
-    _allAudio.querySongs(
-      sortType: SongSortType.DISPLAY_NAME,
-      orderType: OrderType.ASC_OR_SMALLER,
-      uriType: UriType.EXTERNAL,
-    );
-    log("Songs Fetched");
-    print(item.toString());
-  }
+  List<SongModel> songs = [];
+  int currentIndex = 0;
+  String currentSongTitle = '';
 
   playSong(String? uri) {
     try {
@@ -45,16 +36,29 @@ class _AllSongsPageState extends State<AllSongsPage> {
     }
   }
 
+  ConcatenatingAudioSource createPlaylist(List<SongModel> songs) {
+    List<AudioSource> sources = [];
+    for (var song in songs) {
+      sources.add(AudioSource.uri(Uri.parse(song.uri!)));
+    }
+    return ConcatenatingAudioSource(children: sources);
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     requestPermision();
-    getSongData();
   }
 
   void requestPermision() {
     Permission.storage.request();
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
   }
 
   @override
@@ -123,6 +127,8 @@ class _AllSongsPageState extends State<AllSongsPage> {
                   wordSpacing: 1),
             ));
           }
+          songs.clear();
+          songs = item.data!;
           return ListView.builder(
             scrollDirection: Axis.vertical,
             physics: NeverScrollableScrollPhysics(),
@@ -134,7 +140,10 @@ class _AllSongsPageState extends State<AllSongsPage> {
                 artistName: item.data![index].artist,
                 onTap: () {
                   Get.to(() => MusicPlayerScreen(
-                      songModel: item.data![index], audioPlayer: _audioPlayer));
+                        songModel: createPlaylist(item.data!),
+                        audioPlayer: _audioPlayer,
+                        index: index,
+                      ));
                 },
               );
             }),

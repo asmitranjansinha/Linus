@@ -10,10 +10,14 @@ import 'package:on_audio_query/on_audio_query.dart';
 import '../../constants/images.dart';
 
 class MusicPlayerScreen extends StatefulWidget {
-  final SongModel songModel;
+  final songModel;
   final AudioPlayer audioPlayer;
+  final index;
   const MusicPlayerScreen(
-      {super.key, required this.songModel, required this.audioPlayer});
+      {super.key,
+      required this.songModel,
+      required this.audioPlayer,
+      this.index});
 
   @override
   State<MusicPlayerScreen> createState() => _MusicPlayerScreenState();
@@ -29,7 +33,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
   void playSong() {
     try {
       widget.audioPlayer
-          .setAudioSource(AudioSource.uri(Uri.parse(widget.songModel.uri!)));
+          .setAudioSource(widget.songModel, initialIndex: widget.index);
       widget.audioPlayer.play();
       log("Starting Song Now");
       isPlaying = true;
