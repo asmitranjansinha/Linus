@@ -11,9 +11,9 @@ class BottomMusicContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => MusicPlayerScreen(),
-            transition: Transition.downToUp,
-            duration: const Duration(milliseconds: 900));
+        // Get.to(() => MusicPlayerScreen(),
+        //     transition: Transition.downToUp,
+        //     duration: const Duration(milliseconds: 900));
       },
       child: Container(
         height: 70,

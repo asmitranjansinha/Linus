@@ -1,12 +1,17 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:linusplayer/views/base/songs_container.dart';
+import 'package:linusplayer/views/music_player/music_player_screen.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../constants/images.dart';
 import '../base/bottom_music_container.dart';
 import '../base/search_field.dart';
+import '../base/songs_container.dart';
 
 class AllSongsPage extends StatefulWidget {
   AllSongsPage({super.key});
@@ -16,18 +21,41 @@ class AllSongsPage extends StatefulWidget {
 }
 
 class _AllSongsPageState extends State<AllSongsPage> {
+  final _allAudio = OnAudioQuery();
+  final AudioPlayer _audioPlayer = AudioPlayer();
+
+  var item = List<SongModel>;
+
+  getSongData() {
+    _allAudio.querySongs(
+      sortType: SongSortType.DISPLAY_NAME,
+      orderType: OrderType.ASC_OR_SMALLER,
+      uriType: UriType.EXTERNAL,
+    );
+    log("Songs Fetched");
+    print(item.toString());
+  }
+
+  playSong(String? uri) {
+    try {
+      _audioPlayer.setAudioSource(AudioSource.uri(Uri.parse(uri!)));
+      _audioPlayer.play();
+    } on Exception {
+      log("Error playing song");
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     requestPermision();
+    getSongData();
   }
 
   void requestPermision() {
     Permission.storage.request();
   }
-
-  final _allAudio = new OnAudioQuery();
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +132,10 @@ class _AllSongsPageState extends State<AllSongsPage> {
               return SongsContainer(
                 songTitle: item.data![index].displayNameWOExt,
                 artistName: item.data![index].artist,
+                onTap: () {
+                  Get.to(() => MusicPlayerScreen(
+                      songModel: item.data![index], audioPlayer: _audioPlayer));
+                },
               );
             }),
             itemCount: item.data!.length,

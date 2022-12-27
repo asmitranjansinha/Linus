@@ -1,14 +1,19 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 
 import '../../constants/images.dart';
 
 class SongsContainer extends StatelessWidget {
+  final onTap;
   final songTitle;
   final artistName;
   const SongsContainer(
-      {super.key, required this.songTitle, required this.artistName});
+      {super.key,
+      required this.songTitle,
+      required this.artistName,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +51,23 @@ class SongsContainer extends StatelessWidget {
                           letterSpacing: 1),
                     )
                   ],
+                ),
+                InkWell(
+                  onTap: onTap,
+                  borderRadius: BorderRadius.circular(60 / 2),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white54,
+                        borderRadius: BorderRadius.circular(60 / 2)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        Images.play,
+                        scale: 30,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ),
                 InkWell(
                   borderRadius: BorderRadius.circular(60 / 2),

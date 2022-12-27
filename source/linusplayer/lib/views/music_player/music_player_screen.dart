@@ -1,14 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_seekbar/flutter_advanced_seekbar.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
-import 'package:linusplayer/views/base/bottom_navigartion_bar.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 import '../../constants/images.dart';
 
 class MusicPlayerScreen extends StatefulWidget {
-  const MusicPlayerScreen({super.key});
+  final SongModel songModel;
+  final AudioPlayer audioPlayer;
+  const MusicPlayerScreen(
+      {super.key, required this.songModel, required this.audioPlayer});
 
   @override
   State<MusicPlayerScreen> createState() => _MusicPlayerScreenState();
@@ -19,6 +24,20 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
   late final AnimationController _likeController;
 
   bool _liked = false;
+  bool isPlaying = false;
+
+  void playSong() {
+    try {
+      widget.audioPlayer
+          .setAudioSource(AudioSource.uri(Uri.parse(widget.songModel.uri!)));
+      widget.audioPlayer.play();
+      log("Starting Song Now");
+      isPlaying = true;
+      log("Song Played");
+    } on Exception {
+      log("Cannot Play Song");
+    }
+  }
 
   @override
   void initState() {
@@ -26,6 +45,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
     super.initState();
     _likeController = AnimationController(
         vsync: this, duration: const Duration(seconds: 1, milliseconds: 5));
+    playSong();
   }
 
   @override
@@ -163,27 +183,64 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
                   Images.shuffle,
                   scale: 20,
                 ),
-                Image.asset(
-                  Images.previous,
-                  scale: 15,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(60 / 2)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Center(
+                InkWell(
+                  borderRadius: BorderRadius.circular(60 / 2),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(60 / 2)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(2.0),
                       child: Image.asset(
-                        Images.play,
-                        scale: 18,
+                        Images.previous,
+                        scale: 15,
+                        color: Colors.black,
                       ),
                     ),
                   ),
                 ),
-                Image.asset(
-                  Images.next,
-                  scale: 15,
+                InkWell(
+                  borderRadius: BorderRadius.circular(60 / 2),
+                  onTap: () {
+                    setState(() {
+                      if (isPlaying) {
+                        widget.audioPlayer.pause();
+                      } else {
+                        widget.audioPlayer.play();
+                      }
+                      isPlaying = !isPlaying;
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(60 / 2)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Center(
+                        child: Image.asset(
+                          isPlaying ? Images.pause : Images.play,
+                          scale: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  borderRadius: BorderRadius.circular(60 / 2),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(60 / 2)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Image.asset(
+                        Images.next,
+                        scale: 15,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
                 ),
                 Image.asset(
                   Images.repeat,
