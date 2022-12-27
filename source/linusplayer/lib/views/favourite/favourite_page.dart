@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:linusplayer/controller/song_controller.dart';
 import 'package:linusplayer/views/base/bottom_music_container.dart';
-import 'package:linusplayer/views/base/search_field.dart';
-import 'package:linusplayer/views/base/songs_container.dart';
-import 'package:linusplayer/views/music_player/music_player_screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-import '../../constants/images.dart';
 import 'favourite_database.dart';
 
 class FavouritePage extends StatefulWidget {

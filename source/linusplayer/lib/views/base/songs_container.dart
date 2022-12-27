@@ -35,25 +35,31 @@ class SongsContainer extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      songTitle,
-                      style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 1),
-                    ),
-                    Text(
-                      artistName,
-                      style: const TextStyle(
-                          fontSize: 13,
-                          color: Colors.white60,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 1),
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        songTitle,
+                        softWrap: false,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 1),
+                      ),
+                      Text(
+                        artistName,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        style: const TextStyle(
+                            fontSize: 13,
+                            color: Colors.white60,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 1),
+                      ),
+                    ],
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
