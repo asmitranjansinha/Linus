@@ -38,6 +38,6 @@ The favourite button has a beautiful animation which gives an exctitng feeling t
 
 * The list also contains a search bar using which the user can searchany song they would like to listen.
 
-![All songs List](https://github.com/asmitranjansinha/Linus/blob/main/source/images/player.png?raw=true)
+![All songs List](https://github.com/asmitranjansinha/Linus/blob/main/source/images/player.png?raw=true = 100x20)
 
 
