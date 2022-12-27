@@ -1,28 +1,25 @@
-import 'package:flutter/material.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-import '../notifiers/play_button_notifier.dart';
-import '../notifiers/progress_notifier.dart';
-import '../notifiers/repeat_button_notifer.dart';
-
 class SongController {
-  final currentSongTitleNotifier = ValueNotifier<String>('');
-  final playlistNotifier = ValueNotifier<List<String>>([]);
-  final progressNotifier = ProgressNotifier();
-  final repeatButtonNotifier = RepeatButtonNotifier();
-  final isFirstSongNotifier = ValueNotifier<bool>(true);
-  final playButtonNotifier = PlayButtonNotifier();
-  final isLastSongNotifier = ValueNotifier<bool>(true);
-  final isShuffleModeEnabledNotifier = ValueNotifier<bool>(false);
-
-  late ConcatenatingAudioSource playlist;
-  late AudioPlayer audioPlayer;
-  late SongModel songModel;
-
-  void setInitialPlaylist() async {
-    playlist = ConcatenatingAudioSource(
-        children: [AudioSource.uri(Uri.parse(songModel.uri!))]);
-    await audioPlayer.setAudioSource(playlist);
+  static AudioPlayer player = AudioPlayer();
+  static int currentIndex = -1;
+  static List<SongModel> songscopy = [];
+  static List<SongModel> playingSongs = [];
+  static ConcatenatingAudioSource createSongList(List<SongModel> songs) {
+    List<AudioSource> sources = [];
+    playingSongs = songs;
+    for (var song in songs) {
+      sources.add(AudioSource.uri(
+        Uri.parse(song.uri!),
+        tag: MediaItem(
+            id: song.id.toString(),
+            title: song.title,
+            album: song.album,
+            artist: song.artist),
+      ));
+    }
+    return ConcatenatingAudioSource(children: sources);
   }
 }

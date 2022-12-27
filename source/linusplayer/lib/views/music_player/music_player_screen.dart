@@ -4,20 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_seekbar/flutter_advanced_seekbar.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:linusplayer/controller/song_controller.dart';
 import 'package:lottie/lottie.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 import '../../constants/images.dart';
 
 class MusicPlayerScreen extends StatefulWidget {
-  final songModel;
-  final AudioPlayer audioPlayer;
-  final index;
-  const MusicPlayerScreen(
-      {super.key,
-      required this.songModel,
-      required this.audioPlayer,
-      this.index});
+  final List<SongModel> playersong;
+  const MusicPlayerScreen({
+    super.key,
+    required this.playersong,
+  });
 
   @override
   State<MusicPlayerScreen> createState() => _MusicPlayerScreenState();
@@ -27,29 +25,40 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _likeController;
 
+  final Duration _duration = const Duration();
+  final Duration _position = const Duration();
+  int currentIndex = 0;
+
   bool _liked = false;
   bool isPlaying = false;
 
-  void playSong() {
-    try {
-      widget.audioPlayer
-          .setAudioSource(widget.songModel, initialIndex: widget.index);
-      widget.audioPlayer.play();
-      log("Starting Song Now");
-      isPlaying = true;
-      log("Song Played");
-    } on Exception {
-      log("Cannot Play Song");
-    }
-  }
+  // void playSong() {
+  //   try {
+  //     widget.audioPlayer
+  //         .setAudioSource(widget.songModel, initialIndex: widget.index);
+  //     widget.audioPlayer.play();
+  //     log("Starting Song Now");
+  //     isPlaying = true;
+  //     log("Song Played");
+  //   } on Exception {
+  //     log("Cannot Play Song");
+  //   }
+  // }
 
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
     _likeController = AnimationController(
         vsync: this, duration: const Duration(seconds: 1, milliseconds: 5));
-    playSong();
+    SongController.player.currentIndexStream.listen((index) {
+      if (index != null && mounted) {
+        setState(() {
+          currentIndex = index;
+        });
+        SongController.currentIndex = index;
+      }
+    });
+    isPlaying = true;
+    super.initState();
   }
 
   @override
@@ -136,22 +145,24 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
                 ),
                 Column(
                   children: [
-                    const Text(
-                      "Song Title",
-                      style: TextStyle(
+                    Text(
+                      widget.playersong[currentIndex].displayNameWOExt,
+                      overflow: TextOverflow.fade,
+                      maxLines: 1,
+                      style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 25,
+                          fontSize: 20,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 2),
                     ),
                     SizedBox(
                       height: size.height / 100,
                     ),
-                    const Text(
-                      "Artist",
-                      style: TextStyle(
+                    Text(
+                      widget.playersong[currentIndex].artist.toString(),
+                      style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 15,
                           fontWeight: FontWeight.w500,
                           letterSpacing: 2),
                     ),
@@ -188,6 +199,17 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
                   scale: 20,
                 ),
                 InkWell(
+                  onTap: () {
+                    setState(() {
+                      if (SongController.player.hasPrevious) {
+                        SongController.player.seekToPrevious();
+                        SongController.player.play();
+                      } else {
+                        SongController.player.play();
+                      }
+                      isPlaying = true;
+                    });
+                  },
                   borderRadius: BorderRadius.circular(60 / 2),
                   child: Container(
                     decoration: BoxDecoration(
@@ -208,9 +230,9 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
                   onTap: () {
                     setState(() {
                       if (isPlaying) {
-                        widget.audioPlayer.pause();
+                        SongController.player.pause();
                       } else {
-                        widget.audioPlayer.play();
+                        SongController.player.play();
                       }
                       isPlaying = !isPlaying;
                     });
@@ -231,6 +253,17 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
                   ),
                 ),
                 InkWell(
+                  onTap: () {
+                    setState(() async {
+                      if (SongController.player.hasNext) {
+                        await SongController.player.seekToNext();
+                        await SongController.player.play();
+                      } else {
+                        await SongController.player.play();
+                      }
+                      isPlaying = true;
+                    });
+                  },
                   borderRadius: BorderRadius.circular(60 / 2),
                   child: Container(
                     decoration: BoxDecoration(

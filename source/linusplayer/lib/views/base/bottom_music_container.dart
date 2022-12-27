@@ -1,19 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:linusplayer/views/music_player/music_player_screen.dart';
+import 'package:linusplayer/controller/song_controller.dart';
 
 import '../../constants/images.dart';
+import '../music_player/music_player_screen.dart';
 
-class BottomMusicContainer extends StatelessWidget {
+class BottomMusicContainer extends StatefulWidget {
   const BottomMusicContainer({super.key});
+
+  @override
+  State<BottomMusicContainer> createState() => _BottomMusicContainerState();
+}
+
+class _BottomMusicContainerState extends State<BottomMusicContainer> {
+  @override
+  void initState() {
+    SongController.player.currentIndexStream.listen((index) {
+      if (index != null) {
+        setState(() {});
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Get.to(() => MusicPlayerScreen(),
-        //     transition: Transition.downToUp,
-        //     duration: const Duration(milliseconds: 900));
+        Get.to(
+            () => MusicPlayerScreen(
+                  playersong: SongController.playingSongs,
+                ),
+            transition: Transition.downToUp,
+            duration: const Duration(milliseconds: 900));
       },
       child: Container(
         height: 70,
@@ -45,19 +64,26 @@ class BottomMusicContainer extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 18),
                 child: Column(
-                  children: const [
+                  children: [
                     Text(
-                      "Song Title",
-                      style: TextStyle(
+                      SongController
+                          .playingSongs[SongController.player.currentIndex!]
+                          .displayNameWOExt,
+                      style: const TextStyle(
+                          color: Colors.black,
                           fontWeight: FontWeight.w800,
-                          fontSize: 20,
+                          fontSize: 12,
                           letterSpacing: 0.5),
                     ),
                     Text(
-                      "Artist",
-                      style: TextStyle(
+                      SongController
+                          .playingSongs[SongController.player.currentIndex!]
+                          .artist
+                          .toString(),
+                      style: const TextStyle(
+                          color: Colors.black,
                           fontWeight: FontWeight.w600,
-                          fontSize: 15,
+                          fontSize: 10,
                           letterSpacing: 0.5),
                     )
                   ],
@@ -66,37 +92,92 @@ class BottomMusicContainer extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.asset(
-                    Images.previous,
-                    scale: 18,
-                    color: Colors.black,
-                  ),
                   const SizedBox(
                     width: 20,
                   ),
-                  Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(60 / 2)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Center(
-                        child: Image.asset(
-                          Images.play,
-                          scale: 25,
-                          color: Colors.white,
-                        ),
-                      ),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(60 / 2),
+                    onTap: () {
+                      setState(() {
+                        if (SongController.player.playing) {
+                          SongController.player.pause();
+                        } else {
+                          SongController.player.play();
+                        }
+                      });
+                    },
+                    child: StreamBuilder<bool>(
+                      stream: SongController.player.playingStream,
+                      builder: (context, snapshot) {
+                        bool? playingStage = snapshot.data;
+                        if (playingStage != null && playingStage) {
+                          return Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(60 / 2)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(1.0),
+                                child: Image.asset(
+                                  Images.pause,
+                                  color: Colors.white,
+                                  scale: 15,
+                                ),
+                              ),
+                            ),
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(60 / 2)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Center(
+                                  child: Image.asset(
+                                    Images.play,
+                                    scale: 10,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                      },
                     ),
                   ),
                   const SizedBox(
                     width: 20,
                   ),
-                  Image.asset(
-                    Images.next,
-                    scale: 18,
-                    color: Colors.black,
+                  InkWell(
+                    onTap: () {
+                      setState(() async {
+                        if (SongController.player.hasNext) {
+                          await SongController.player.seekToNext();
+                          await SongController.player.play();
+                        } else {
+                          await SongController.player.play();
+                        }
+                      });
+                    },
+                    borderRadius: BorderRadius.circular(60 / 2),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(60 / 2)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(1.0),
+                        child: Image.asset(
+                          Images.next,
+                          scale: 15,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

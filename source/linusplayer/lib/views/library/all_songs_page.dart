@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:linusplayer/controller/song_controller.dart';
 import 'package:linusplayer/views/base/songs_container.dart';
 import 'package:linusplayer/views/music_player/music_player_screen.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -16,6 +17,8 @@ import '../base/songs_container.dart';
 class AllSongsPage extends StatefulWidget {
   AllSongsPage({super.key});
 
+  static List<SongModel> songs = [];
+
   @override
   State<AllSongsPage> createState() => _AllSongsPageState();
 }
@@ -23,9 +26,7 @@ class AllSongsPage extends StatefulWidget {
 class _AllSongsPageState extends State<AllSongsPage> {
   final _allAudio = OnAudioQuery();
   final AudioPlayer _audioPlayer = AudioPlayer();
-  List<SongModel> songs = [];
-  int currentIndex = 0;
-  String currentSongTitle = '';
+  SongController songController = SongController();
 
   playSong(String? uri) {
     try {
@@ -127,8 +128,7 @@ class _AllSongsPageState extends State<AllSongsPage> {
                   wordSpacing: 1),
             ));
           }
-          songs.clear();
-          songs = item.data!;
+          AllSongsPage.songs = item.data!;
           return ListView.builder(
             scrollDirection: Axis.vertical,
             physics: NeverScrollableScrollPhysics(),
@@ -139,11 +139,11 @@ class _AllSongsPageState extends State<AllSongsPage> {
                 songTitle: item.data![index].displayNameWOExt,
                 artistName: item.data![index].artist,
                 onTap: () {
-                  Get.to(() => MusicPlayerScreen(
-                        songModel: createPlaylist(item.data!),
-                        audioPlayer: _audioPlayer,
-                        index: index,
-                      ));
+                  SongController.player.setAudioSource(
+                      SongController.createSongList(item.data!),
+                      initialIndex: index);
+                  SongController.player.play();
+                  //Get.to(() => MusicPlayerScreen(playersong: item.data!));
                 },
               );
             }),
