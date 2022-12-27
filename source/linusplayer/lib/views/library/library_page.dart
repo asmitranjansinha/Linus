@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:linusplayer/views/base/bottom_music_container.dart';
 import 'package:linusplayer/views/base/text_container.dart';
+import 'package:linusplayer/views/library/all_songs_page.dart';
 
 class LibraryPage extends StatelessWidget {
   const LibraryPage({super.key});
@@ -31,7 +33,10 @@ class LibraryPage extends StatelessWidget {
               ),
               TextContainer(
                 textData: "All Songs",
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => AllSongsPage(),
+                      transition: Transition.cupertinoDialog);
+                },
               )
             ],
           ),

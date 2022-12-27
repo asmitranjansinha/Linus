@@ -39,6 +39,8 @@ dependencies:
   lottie: ^2.1.0
   flutter_advanced_seekbar: ^0.0.2
   get: ^4.6.5
+  on_audio_query: ^2.6.1
+  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:linusplayer/views/base/bottom_music_container.dart';
+import 'package:linusplayer/views/base/search_field.dart';
 
 class FavouritePage extends StatelessWidget {
   const FavouritePage({super.key});
@@ -14,9 +15,9 @@ class FavouritePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
+            children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
                 child: Text(
                   "Your Favourites ❥",
                   style: TextStyle(
@@ -25,6 +26,10 @@ class FavouritePage extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
               ),
+              SizedBox(
+                height: size.height / 100,
+              ),
+              SearcxhField(hintText: "Find in Favourite Songs")
             ],
           ),
         )));

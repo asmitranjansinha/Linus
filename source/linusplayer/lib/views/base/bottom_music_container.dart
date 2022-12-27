@@ -13,7 +13,7 @@ class BottomMusicContainer extends StatelessWidget {
       onTap: () {
         Get.to(() => MusicPlayerScreen(),
             transition: Transition.downToUp,
-            duration: Duration(milliseconds: 900));
+            duration: const Duration(milliseconds: 900));
       },
       child: Container(
         height: 70,

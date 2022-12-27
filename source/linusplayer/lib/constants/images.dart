@@ -9,6 +9,7 @@ class Images {
   static const String favouriteGraphic = "assets/images/lover.png";
   static const String downArrow =
       "assets/images/arrow-down-sign-to-navigate.png";
+  static const String backGraphic = "assets/images/back.png";
   static const String downArrowGraphic = "assets/images/down-arrow.png";
   static const String musicLibraryGraphic = "assets/images/music.png";
   static const String musicAlbumArtGraphic = "assets/images/music-notes.png";
@@ -19,4 +20,5 @@ class Images {
   static const String pause = "assets/images/pause.png";
   static const String previous = "assets/images/previous-2.png";
   static const String next = "assets/images/next.png";
+  static const String moreGraphic = "assets/images/more-2.png";
 }
