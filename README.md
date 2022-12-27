@@ -30,7 +30,7 @@ favourites list.
 The favourite list consists of songs that the user marks as their favourites. 
 The favourite button has a beautiful animation which gives an exctitng feeling to the user.
 
-<img src="https://github.com/asmitranjansinha/Linus/blob/main/source/images/favourite.png?raw=true" width="32%">
+<img src="https://github.com/asmitranjansinha/Linus/blob/main/source/images/favourites.png?raw=true" width="32%">
 
 ### All songs list
 
