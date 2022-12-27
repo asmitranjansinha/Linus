@@ -94,16 +94,25 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
             Padding(
               padding: const EdgeInsets.all(50.0),
               child: Container(
+                height: size.height / 2.7,
+                width: size.width / 1.2,
                 decoration: BoxDecoration(
                     boxShadow: const [
                       BoxShadow(color: Colors.grey, blurRadius: 60)
                     ],
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)),
+                    borderRadius: BorderRadius.circular(40)),
                 child: Padding(
                   padding: const EdgeInsets.all(50.0),
-                  child:
-                      Center(child: Image.asset(Images.musicAlbumArtGraphic)),
+                  child: widget.playersong.length != 0
+                      ? QueryArtworkWidget(
+                          id: widget.playersong[currentIndex].id,
+                          type: ArtworkType.AUDIO,
+                          nullArtworkWidget: Image.asset(
+                            Images.musicAlbumArtGraphic,
+                          ),
+                        )
+                      : Center(child: Image.asset(Images.musicAlbumArtGraphic)),
                 ),
               ),
             ),

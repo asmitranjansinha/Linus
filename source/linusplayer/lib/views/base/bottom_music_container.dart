@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:linusplayer/controller/song_controller.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 import '../../constants/images.dart';
 import '../music_player/music_player_screen.dart';
@@ -49,19 +50,18 @@ class _BottomMusicContainerState extends State<BottomMusicContainer> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(color: Colors.grey, blurRadius: 60)
-                      ],
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child:
-                        Center(child: Image.asset(Images.musicAlbumArtGraphic)),
-                  ),
-                ),
+                child: SongController.player.currentIndex != null
+                    ? QueryArtworkWidget(
+                        id: SongController
+                            .playingSongs[SongController.player.currentIndex!]
+                            .id,
+                        type: ArtworkType.AUDIO,
+                        nullArtworkWidget: Image.asset(
+                          Images.musicAlbumArtGraphic,
+                          scale: 10,
+                        ),
+                      )
+                    : Center(child: Image.asset(Images.musicAlbumArtGraphic)),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 18),
