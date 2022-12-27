@@ -25,6 +25,7 @@ LinusPlayer consists of mainly four components:
 
 <img src="https://github.com/asmitranjansinha/Linus/blob/main/source/images/library.png?raw=true" width="32%">
 
+
 ### Player
 
 The player page consists of play/pause button, prev and next button to slide between 
