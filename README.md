@@ -23,6 +23,7 @@ The player page consists of play/pause button, prev and next button to slide bet
 tracks form the library and also the heart button to add the  current songs to the 
 favourites list.
 
+<img src="https://github.com/Sangwan5688/BlackHole/blob/main/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png?raw=true" width="32%">
 ![Player](https://github.com/asmitranjansinha/Linus/blob/main/source/images/player.png?raw=true)
 
 ### Favourite
