@@ -1,8 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:linusplayer/views/base/bottom_music_container.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  void requestPermission() async {
+    await Permission.storage.request();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    requestPermission();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

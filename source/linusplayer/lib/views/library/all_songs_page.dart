@@ -49,7 +49,6 @@ class _AllSongsPageState extends State<AllSongsPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    requestPermision();
   }
 
   void requestPermision() {
