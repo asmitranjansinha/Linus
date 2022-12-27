@@ -23,15 +23,14 @@ The player page consists of play/pause button, prev and next button to slide bet
 tracks form the library and also the heart button to add the  current songs to the 
 favourites list.
 
-<img src="https://github.com/Sangwan5688/BlackHole/blob/main/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png?raw=true" width="32%">
-![Player](https://github.com/asmitranjansinha/Linus/blob/main/source/images/player.png?raw=true)
+<img src="https://github.com/asmitranjansinha/Linus/blob/main/source/images/player.png?raw=true" width="32%">
 
 ### Favourite
 
 The favourite list consists of songs that the user marks as their favourites. 
 The favourite button has a beautiful animation which gives an exctitng feeling to the user.
 
-![Favourite](https://github.com/asmitranjansinha/Linus/blob/main/source/images/favourites.png?raw=true)
+<img src="https://github.com/asmitranjansinha/Linus/blob/main/source/images/favourite.png?raw=true" width="32%">
 
 ### All songs list
 
@@ -39,6 +38,6 @@ The favourite button has a beautiful animation which gives an exctitng feeling t
 
 * The list also contains a search bar using which the user can searchany song they would like to listen.
 
-![All songs List](https://github.com/asmitranjansinha/Linus/blob/main/source/images/player.png?raw=true)
+<img src="https://github.com/asmitranjansinha/Linus/blob/main/source/images/library.png?raw=true" width="32%">
 
 
