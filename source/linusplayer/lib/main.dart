@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:linusplayer/views/base/bottom_navigartion_bar.dart';
 import 'package:linusplayer/views/music_player/music_player_screen.dart';
 
-void main() {
+import 'model/playlistmodel.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(PlayListModelAdapter().typeId)) {
+    Hive.registerAdapter(PlayListModelAdapter());
+  }
+  await Hive.openBox<int>('favoriteDB');
+  await Hive.openBox<PlayListModel>('playlist_db');
   runApp(const MyApp());
 }
 

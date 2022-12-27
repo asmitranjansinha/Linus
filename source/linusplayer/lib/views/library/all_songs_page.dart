@@ -136,6 +136,7 @@ class _AllSongsPageState extends State<AllSongsPage> {
             primary: false,
             itemBuilder: ((context, index) {
               return SongsContainer(
+                fav: AllSongsPage.songs[index],
                 songTitle: item.data![index].displayNameWOExt,
                 artistName: item.data![index].artist,
                 onTap: () {

@@ -1,10 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_seekbar/flutter_advanced_seekbar.dart';
 import 'package:get/get.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:linusplayer/controller/song_controller.dart';
+import 'package:linusplayer/views/base/fav_button.dart';
 import 'package:lottie/lottie.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -31,19 +29,6 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
 
   bool _liked = false;
   bool isPlaying = false;
-
-  // void playSong() {
-  //   try {
-  //     widget.audioPlayer
-  //         .setAudioSource(widget.songModel, initialIndex: widget.index);
-  //     widget.audioPlayer.play();
-  //     log("Starting Song Now");
-  //     isPlaying = true;
-  //     log("Song Played");
-  //   } on Exception {
-  //     log("Cannot Play Song");
-  //   }
-  // }
 
   @override
   void initState() {
@@ -125,28 +110,24 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                InkWell(
-                  borderRadius: BorderRadius.circular(60 / 2),
-                  onTap: () {
-                    if (_liked == false) {
-                      _liked = true;
-                      _likeController.forward();
-                    } else {
-                      _liked = false;
-                      _likeController.reverse();
-                    }
-                  },
-                  child: SizedBox(
-                    height: size.height / 10,
-                    child: Lottie.asset(
-                        "assets/images/favourite_animation.json",
-                        controller: _likeController),
-                  ),
-                ),
+                widget.playersong.length != 0
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: FavButton(song: widget.playersong[currentIndex]),
+                      )
+                    : const Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 28),
+                        child: Icon(
+                          Icons.favorite_border,
+                          color: Colors.white,
+                        ),
+                      ),
                 Column(
                   children: [
                     Text(
-                      widget.playersong[currentIndex].displayNameWOExt,
+                      widget.playersong.length != 0
+                          ? widget.playersong[currentIndex].displayNameWOExt
+                          : "Song Title",
                       overflow: TextOverflow.fade,
                       maxLines: 1,
                       style: const TextStyle(
@@ -159,7 +140,9 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
                       height: size.height / 100,
                     ),
                     Text(
-                      widget.playersong[currentIndex].artist.toString(),
+                      widget.playersong.length != 0
+                          ? widget.playersong[currentIndex].artist.toString()
+                          : "Artist",
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 15,

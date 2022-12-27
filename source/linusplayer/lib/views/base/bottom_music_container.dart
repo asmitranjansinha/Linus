@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks, unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:linusplayer/controller/song_controller.dart';
@@ -66,9 +68,11 @@ class _BottomMusicContainerState extends State<BottomMusicContainer> {
                 child: Column(
                   children: [
                     Text(
-                      SongController
-                          .playingSongs[SongController.player.currentIndex!]
-                          .displayNameWOExt,
+                      SongController.player.currentIndex != null
+                          ? SongController
+                              .playingSongs[SongController.player.currentIndex!]
+                              .displayNameWOExt
+                          : "Song Title",
                       style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w800,
@@ -76,10 +80,12 @@ class _BottomMusicContainerState extends State<BottomMusicContainer> {
                           letterSpacing: 0.5),
                     ),
                     Text(
-                      SongController
-                          .playingSongs[SongController.player.currentIndex!]
-                          .artist
-                          .toString(),
+                      SongController.player.currentIndex != null
+                          ? SongController
+                              .playingSongs[SongController.player.currentIndex!]
+                              .artist
+                              .toString()
+                          : "Artist",
                       style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,
