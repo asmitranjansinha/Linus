@@ -23,7 +23,7 @@ class TextContainer extends StatelessWidget {
           child: Text(
             textData,
             style: const TextStyle(
-                fontSize: 20, fontWeight: FontWeight.w500, letterSpacing: 1),
+                fontSize: 15, fontWeight: FontWeight.w500, letterSpacing: 1),
           ),
         ),
       ),

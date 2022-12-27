@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:linusplayer/constants/images.dart';
 import 'package:linusplayer/views/favourite/favourite_page.dart';
-import 'package:linusplayer/views/home/home_page.dart';
 import 'package:linusplayer/views/library/library_page.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -14,7 +13,7 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
 
-  final screen = [const HomePage(), const LibraryPage(), const FavouritePage()];
+  final screen = [const LibraryPage(), const FavouritePage()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -43,13 +42,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           items: [
-            BottomNavigationBarItem(
-              icon: Image.asset(
-                Images.homeGraphic,
-                scale: 18,
-              ),
-              label: "home",
-            ),
             BottomNavigationBarItem(
                 icon: Image.asset(
                   Images.libraryGraphic,

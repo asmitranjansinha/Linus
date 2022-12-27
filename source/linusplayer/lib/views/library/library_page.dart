@@ -3,9 +3,26 @@ import 'package:get/get.dart';
 import 'package:linusplayer/views/base/bottom_music_container.dart';
 import 'package:linusplayer/views/base/text_container.dart';
 import 'package:linusplayer/views/library/all_songs_page.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-class LibraryPage extends StatelessWidget {
+class LibraryPage extends StatefulWidget {
   const LibraryPage({super.key});
+
+  @override
+  State<LibraryPage> createState() => _LibraryPageState();
+}
+
+class _LibraryPageState extends State<LibraryPage> {
+  void requestPermission() async {
+    await Permission.storage.request();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    requestPermission();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

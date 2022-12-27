@@ -41,8 +41,8 @@ class SongsContainer extends StatelessWidget {
                     children: [
                       Text(
                         songTitle,
-                        softWrap: false,
                         overflow: TextOverflow.ellipsis,
+                        softWrap: false,
                         style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
