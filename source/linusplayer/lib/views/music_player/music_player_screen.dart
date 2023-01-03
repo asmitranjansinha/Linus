@@ -101,9 +101,9 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
                       BoxShadow(color: Colors.grey, blurRadius: 60)
                     ],
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(40)),
+                    borderRadius: BorderRadius.circular(65)),
                 child: Padding(
-                  padding: const EdgeInsets.all(50.0),
+                  padding: const EdgeInsets.all(30.0),
                   child: widget.playersong.isNotEmpty
                       ? QueryArtworkWidget(
                           id: widget.playersong[currentIndex].id,
@@ -125,7 +125,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
                         child: FavButton(song: widget.playersong[currentIndex]),
                       )
                     : const Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 28),
+                        padding: EdgeInsets.symmetric(horizontal: 28),
                         child: Icon(
                           Icons.favorite_border,
                           color: Colors.white,
@@ -213,10 +213,10 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(60 / 2)),
                     child: Padding(
-                      padding: const EdgeInsets.all(2.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Image.asset(
                         Images.previous,
-                        scale: 15,
+                        scale: 30,
                         color: Colors.black,
                       ),
                     ),
@@ -267,10 +267,10 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(60 / 2)),
                     child: Padding(
-                      padding: const EdgeInsets.all(2.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Image.asset(
                         Images.next,
-                        scale: 15,
+                        scale: 30,
                         color: Colors.black,
                       ),
                     ),

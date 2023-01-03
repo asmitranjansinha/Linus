@@ -18,7 +18,7 @@ class Images {
   static const String repeat = "assets/images/repeat.png";
   static const String play = "assets/images/play-button-arrowhead.png";
   static const String pause = "assets/images/pause.png";
-  static const String previous = "assets/images/previous-2.png";
+  static const String previous = "assets/images/previous.png";
   static const String next = "assets/images/next.png";
   static const String moreGraphic = "assets/images/more-2.png";
 }

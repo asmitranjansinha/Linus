@@ -64,10 +64,10 @@ class _BottomMusicContainerState extends State<BottomMusicContainer> {
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(60 / 2)),
                   child: Padding(
-                    padding: const EdgeInsets.all(1.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Image.asset(
                       Images.previous,
-                      scale: 15,
+                      scale: 30,
                       color: Colors.white,
                     ),
                   ),
@@ -93,17 +93,17 @@ class _BottomMusicContainerState extends State<BottomMusicContainer> {
                     bool? playingStage = snapshot.data;
                     if (playingStage != null && playingStage) {
                       return Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Container(
                           decoration: BoxDecoration(
                               color: Colors.black,
                               borderRadius: BorderRadius.circular(60 / 2)),
                           child: Padding(
-                            padding: const EdgeInsets.all(1.0),
+                            padding: const EdgeInsets.all(15.0),
                             child: Image.asset(
                               Images.pause,
                               color: Colors.white,
-                              scale: 15,
+                              scale: 10,
                             ),
                           ),
                         ),
@@ -151,10 +151,10 @@ class _BottomMusicContainerState extends State<BottomMusicContainer> {
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(60 / 2)),
                   child: Padding(
-                    padding: const EdgeInsets.all(1.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Image.asset(
                       Images.next,
-                      scale: 15,
+                      scale: 30,
                       color: Colors.white,
                     ),
                   ),
