@@ -10,7 +10,7 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../constants/images.dart';
-import '../base/bottom_music_container.dart';
+import '../base/mini_player.dart';
 import '../base/search_field.dart';
 import '../base/songs_container.dart';
 

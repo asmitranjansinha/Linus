@@ -104,7 +104,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
                     borderRadius: BorderRadius.circular(40)),
                 child: Padding(
                   padding: const EdgeInsets.all(50.0),
-                  child: widget.playersong.length != 0
+                  child: widget.playersong.isNotEmpty
                       ? QueryArtworkWidget(
                           id: widget.playersong[currentIndex].id,
                           type: ArtworkType.AUDIO,
@@ -119,7 +119,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                widget.playersong.length != 0
+                widget.playersong.isNotEmpty
                     ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: FavButton(song: widget.playersong[currentIndex]),
@@ -131,34 +131,39 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
                           color: Colors.white,
                         ),
                       ),
-                Column(
-                  children: [
-                    Text(
-                      widget.playersong.length != 0
-                          ? widget.playersong[currentIndex].displayNameWOExt
-                          : "Song Title",
-                      overflow: TextOverflow.fade,
-                      maxLines: 1,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 2),
-                    ),
-                    SizedBox(
-                      height: size.height / 100,
-                    ),
-                    Text(
-                      widget.playersong.length != 0
-                          ? widget.playersong[currentIndex].artist.toString()
-                          : "Artist",
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 2),
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text(
+                        widget.playersong.isNotEmpty
+                            ? widget.playersong[currentIndex].displayNameWOExt
+                            : "Song Title",
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 2),
+                      ),
+                      SizedBox(
+                        height: size.height / 100,
+                      ),
+                      Text(
+                        widget.playersong.isNotEmpty
+                            ? widget.playersong[currentIndex].artist.toString()
+                            : "Artist",
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 2),
+                      ),
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 28),

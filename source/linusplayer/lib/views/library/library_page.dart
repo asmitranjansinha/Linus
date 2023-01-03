@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:linusplayer/views/base/bottom_music_container.dart';
+import 'package:linusplayer/views/base/mini_player.dart';
 import 'package:linusplayer/views/base/text_container.dart';
 import 'package:linusplayer/views/library/all_songs_page.dart';
 import 'package:permission_handler/permission_handler.dart';
